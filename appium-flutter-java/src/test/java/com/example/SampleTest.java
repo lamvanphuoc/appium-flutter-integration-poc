@@ -35,7 +35,7 @@ class SampleTest {
 
         BaseOptions<?> options = new BaseOptions<>()
                 .setPlatformName("Android")
-                .amend("appium:automationName", "FlutterIntegration")
+                .amend("appium:automationName", "UiAutomator2")
                 .amend("appium:deviceName", required("android.deviceName"))
                 .amend("appium:app", appPath.toString())
                 .amend("flutterSystemPort", 9000)
