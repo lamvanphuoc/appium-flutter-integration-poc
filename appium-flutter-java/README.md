@@ -1,6 +1,8 @@
 # Appium Flutter Integration (Java + Gradle)
 
 This project is a minimal Android smoke test that verifies Flutter UI elements are visible using Appium Flutter Integration Driver.
+https://github.com/AppiumTestDistribution/appium-flutter-integration-driver
+Locator helper: https://github.com/AppiumTestDistribution/flutter-finder 
 
 ## Prerequisites
 
@@ -49,7 +51,7 @@ Run the APK build command:
 
 ```bash
 cd android-test-app 
-./gradlew app:assembleDebug -Ptarget=`pwd`/../integration_test/appium_test.dart
+./gradlew :app:assembleDebug -Ptarget=/Users/lamvan/Projects/mobile-cartoncloud/appium-flutter-integration-poc/flutter-test-app/integration_test/app_test.dart
 ```
 
 ## Run the Test
