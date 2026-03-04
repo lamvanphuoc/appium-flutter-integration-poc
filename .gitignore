@@ -19,13 +19,13 @@
 /appium-flutter-java/**/build/
 /appium-flutter-java/bin/
 
-# integration_test_sample Flutter/Dart artifacts
-/integration_test_sample/.dart_tool/
-/integration_test_sample/.flutter-plugins
-/integration_test_sample/.flutter-plugins-dependencies
-/integration_test_sample/.pub/
-/integration_test_sample/.pub-cache/
-/integration_test_sample/.android/
-/integration_test_sample/build/
-/integration_test_sample/**/build/
-/integration_test_sample/**/ios/Flutter/.last_build_id
+# flutter-test-app Flutter/Dart artifacts
+/flutter-test-app/.dart_tool/
+/flutter-test-app/.flutter-plugins
+/flutter-test-app/.flutter-plugins-dependencies
+/flutter-test-app/.pub/
+/flutter-test-app/.pub-cache/
+/flutter-test-app/.android/
+/flutter-test-app/build/
+/flutter-test-app/**/build/
+/flutter-test-app/**/ios/Flutter/.last_build_id

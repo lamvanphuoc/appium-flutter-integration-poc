@@ -19,7 +19,7 @@ rootProject.name = "Android Test app"
 include(":app")
 
 // Flutter add-to-app module (source integration).
-apply(from = File(settingsDir.parentFile, "integration_test_sample/.android/include_flutter.groovy"))
+apply(from = File(settingsDir.parentFile, "flutter-test-app/.android/include_flutter.groovy"))
 
 // Keep Dart integration_test dependency, but avoid evaluating the SDK Android plugin project.
 project(":integration_test").projectDir = File(settingsDir, "integration_test_stub")
