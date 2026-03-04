@@ -1,6 +1,6 @@
 # Appium Flutter Integration (Java + Gradle)
 
-This project is a minimal Android smoke test that verifies a button with text `Hello` is visible using Appium Flutter Integration Driver.
+This project is a minimal Android smoke test that verifies Flutter UI elements are visible using Appium Flutter Integration Driver.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ appium driver install --source npm appium-flutter-integration-driver
 - `src/test/java/com/example/HelloButtonVisibleTest.java`: the smoke test
 - `src/test/resources/config.properties`: runtime config values
 
-The test uses standard Selenium locator strategy (`By.xpath`) to inspect the UI hierarchy and find the `Hello` button.
+The test starts with native locator checks in `UiAutomator2`, then uses Flutter finder strategy (`FlutterBy.text("Integration Test")`) after switching to `FlutterIntegration`.
 
 ## Configure Runtime Values
 
@@ -41,4 +41,4 @@ Edit `src/test/resources/config.properties`:
 ## Troubleshooting
 
 - If `app.path` still points to the placeholder value, the test is skipped by design. Set it to a real APK path.
-- If `Hello` is not found, update the XPath in `HelloButtonVisibleTest` based on your actual page source attributes.
+- If `"Integration Test"` is not found in the Flutter session, verify your app title and Flutter integration setup, then adjust the Flutter finder text in `SampleTest`.

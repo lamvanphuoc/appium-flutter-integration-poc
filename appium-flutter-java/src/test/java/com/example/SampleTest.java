@@ -17,6 +17,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.devicefarm.FlutterBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -55,8 +56,7 @@ class SampleTest {
         driver = createDriverWithRetry(FLUTTER_INTEGRATION, true, 3);
 
         WebDriverWait integrationWait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        By integrationTitleLocator = AppiumBy.xpath(
-                "//*[(@text='Integration Test' or @label='Integration Test' or @name='Integration Test' or normalize-space(.)='Integration Test')]");
+        By integrationTitleLocator = FlutterBy.text("Integration Test");
         WebElement integrationTitle = integrationWait.until(d -> d.findElement(integrationTitleLocator));
         Assertions.assertTrue(
                 integrationTitle.isDisplayed(),
