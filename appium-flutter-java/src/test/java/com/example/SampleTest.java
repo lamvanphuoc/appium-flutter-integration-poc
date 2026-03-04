@@ -1,7 +1,6 @@
 package com.example;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.AppiumBy;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -34,10 +33,9 @@ class SampleTest {
 
         // Assert native views are visible in UiAutomator2 session
         WebDriverWait nativeWait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        By tapMeLocator = AppiumBy.xpath(
-                "//*[(@text='Tap me' or @label='Tap me' or @name='Tap me' or normalize-space(.)='Tap me')]");
-        WebElement tapMeButton = nativeWait.until(d -> d.findElement(tapMeLocator));
-        Assertions.assertTrue(tapMeButton.isDisplayed(), "'Tap me' button should be visible in UiAutomator2 session.");
+        By nativeButton = XPathLocators.byAnyText("Open Flutter app");
+        WebElement tapMeButton = nativeWait.until(d -> d.findElement(nativeButton));
+        Assertions.assertTrue(tapMeButton.isDisplayed(), "'Open Flutter app' button should be visible in UiAutomator2 session.");
         tapMeButton.click();
 
         // Swap to Flutter Driver to assert flutter views
@@ -45,7 +43,7 @@ class SampleTest {
         driver = driverManager.createFlutterIntegrationDriver(true);
 
         WebDriverWait integrationWait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        By integrationTitleLocator = FlutterBy.text("Integration Test");
+        By integrationTitleLocator = FlutterBy.text("Flutter Test App");
         WebElement integrationTitle = integrationWait.until(d -> d.findElement(integrationTitleLocator));
         Assertions.assertTrue(
                 integrationTitle.isDisplayed(),

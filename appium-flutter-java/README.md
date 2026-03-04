@@ -15,6 +15,16 @@ Install the driver:
 appium driver install --source npm appium-flutter-integration-driver
 ```
 
+## Appium Versions
+
+Use these versions so setup matches the CartonCloud project
+
+- Appium: `2.0.0-beta.35`
+- Drivers:
+  - `uiautomator2@2.34.2`
+  - `xcuitest@7.35.0`
+  - `flutter-integration@1.1.3`
+
 ## Project Structure
 
 - `build.gradle`: dependencies and JUnit config
@@ -32,6 +42,15 @@ Edit `src/test/resources/config.properties`:
 - `android.deviceName`: emulator/device name
 - `android.platformVersion`: optional Android version
 - `app.path`: path to your Flutter APK
+
+## Generate Flutter APK
+
+Run the APK build command:
+
+```bash
+cd android-test-app 
+./gradlew app:assembleDebug -Ptarget=`pwd`/../integration_test/appium_test.dart
+```
 
 ## Run the Test
 

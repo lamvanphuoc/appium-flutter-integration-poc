@@ -4,7 +4,7 @@ import 'package:integration_test_sample/main.dart' as app;
 
 void main() {
   // TestWidgetsFlutterBinding.ensureInitialized();
-  initializeTest(app: const app.MyApp(title: "Integration Test"));
+  initializeTest(app: const app.MyApp(title: "Flutter Test App"));
   // testWidgets('taps increment button and updates counter', (tester) async {
   //   app.main();
   //   await tester.pumpAndSettle();

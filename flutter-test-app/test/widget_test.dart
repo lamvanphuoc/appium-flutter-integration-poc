@@ -11,20 +11,29 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test_sample/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Main screen shows list and navigates to new screen',
+      (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp(title: "Test",));
+    await tester.pumpWidget(const MyApp(title: 'Test'));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify required widgets are present on the main screen.
+    final Finder openNewScreenButton = find.byKey(const ValueKey('NewScreen'));
+    expect(openNewScreenButton, findsOneWidget);
+    expect(find.text('Open new screen'), findsOneWidget);
+    expect(find.widgetWithText(TextField, 'Text Input'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Verify tapping the button navigates to screen 1.
+    await tester.tap(openNewScreenButton);
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Flutter screen 1'), findsOneWidget);
+    expect(find.text('Item 1'), findsOneWidget);
+
+    await tester.scrollUntilVisible(
+      find.text('Item 20'),
+      300,
+      scrollable: find.byType(Scrollable),
+    );
+    expect(find.text('Item 20'), findsOneWidget);
   });
 }
