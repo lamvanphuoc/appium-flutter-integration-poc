@@ -25,15 +25,15 @@ class DriverManager {
         this.appPath = appPath;
     }
 
-    AppiumDriver createUiAutomator2Driver() throws IOException {
-        return createDriverWithRetry(UI_AUTOMATOR2, DEFAULT_MAX_ATTEMPTS);
+    AppiumDriver createUiAutomator2Driver(boolean closeAppWhenDone) throws IOException {
+        return createDriverWithRetry(UI_AUTOMATOR2, DEFAULT_MAX_ATTEMPTS, closeAppWhenDone);
     }
 
-    AppiumDriver createFlutterIntegrationDriver() throws IOException {
-        return createDriverWithRetry(FLUTTER_INTEGRATION, DEFAULT_MAX_ATTEMPTS);
+    AppiumDriver createFlutterIntegrationDriver(boolean closeAppWhenDone) throws IOException {
+        return createDriverWithRetry(FLUTTER_INTEGRATION, DEFAULT_MAX_ATTEMPTS, closeAppWhenDone);
     }
 
-    private AppiumDriver createDriverWithRetry(String automationName, int maxAttempts)
+    private AppiumDriver createDriverWithRetry(String automationName, int maxAttempts, boolean closeAppWhenDone)
             throws IOException {
         if (maxAttempts < 1) {
             throw new IllegalArgumentException("maxAttempts must be >= 1");
@@ -42,7 +42,7 @@ class DriverManager {
         RuntimeException lastError = null;
         for (int attempt = 1; attempt <= maxAttempts; attempt++) {
             try {
-                return createDriver(automationName);
+                return createDriver(automationName, closeAppWhenDone);
             } catch (RuntimeException e) {
                 lastError = e;
                 if (attempt == maxAttempts) {
@@ -54,23 +54,23 @@ class DriverManager {
         throw lastError;
     }
 
-    private AppiumDriver createDriver(String automationName) throws IOException {
+    private AppiumDriver createDriver(String automationName, boolean closeAppWhenDone) throws IOException {
         if(Objects.equals(automationName, FLUTTER_INTEGRATION)) {
-            return new AppiumDriver(serverUrl, buildFlutterIntegrationDriverOptions());
+            return new AppiumDriver(serverUrl, buildFlutterIntegrationDriverOptions(closeAppWhenDone));
         } else if(Objects.equals(automationName, UI_AUTOMATOR2)) {
-            return new AppiumDriver(serverUrl, buildAndroidUIAutomatorOptions());
+            return new AppiumDriver(serverUrl, buildAndroidUIAutomatorOptions(closeAppWhenDone));
         }
         throw new IllegalArgumentException("Unsupported automation name: " + automationName);
     }
 
-    private BaseOptions<?> buildAndroidUIAutomatorOptions() throws IOException {
+    private BaseOptions<?> buildAndroidUIAutomatorOptions(boolean closeAppWhenDone) throws IOException {
         BaseOptions<?> options = new BaseOptions<>()
                 .setPlatformName("Android")
                 .amend("appium:automationName", UI_AUTOMATOR2)
                 .amend("appium:deviceName", required("android.deviceName"))
                 .amend("appium:noReset", true)
                 .amend("appium:dontStopAppOnReset", true)
-                .amend("appium:shouldTerminateApp", false)
+                .amend("appium:shouldTerminateApp", closeAppWhenDone)
                 .amend("appium:forceAppLaunch", false)
                 .amend("appium:flutterSystemPort", FLUTTER_SYSTEM_PORT)
                 .amend("appium:flutterServerLaunchTimeout", 60000)
@@ -83,14 +83,14 @@ class DriverManager {
         return options;
     }
 
-    private BaseOptions<?> buildFlutterIntegrationDriverOptions() throws IOException {
+    private BaseOptions<?> buildFlutterIntegrationDriverOptions(boolean closeSessionWhenDone) throws IOException {
         BaseOptions<?> options = new BaseOptions<>()
                 .setPlatformName("Android")
                 .amend("appium:automationName", FLUTTER_INTEGRATION)
                 .amend("appium:deviceName", required("android.deviceName"))
                 .amend("appium:noReset", true)
                 .amend("appium:dontStopAppOnReset", true)
-                .amend("appium:shouldTerminateApp", true)
+                .amend("appium:shouldTerminateApp", closeSessionWhenDone)
                 .amend("appium:forceAppLaunch", false)
                 .amend("appium:flutterSystemPort", FLUTTER_SYSTEM_PORT)
                 .amend("appium:flutterServerLaunchTimeout", 60000)
