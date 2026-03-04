@@ -2,7 +2,6 @@ package com.example;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.remote.options.BaseOptions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -24,23 +23,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 class SampleTest {
     private static final String CONFIG_FILE = "config.properties";
-    private static final String UI_AUTOMATOR2 = "UiAutomator2";
-    private static final String FLUTTER_INTEGRATION = "FlutterIntegration";
-    private static final int FLUTTER_SYSTEM_PORT = 9000;
 
     private AppiumDriver driver;
+    private DriverManager driverManager;
     private Properties config;
-    private URL serverUrl;
-    private Path appPath;
 
     @BeforeEach
     void setUp() throws IOException {
         config = loadConfig();
-        appPath = Path.of(required("app.path")).toAbsolutePath();
+        Path appPath = Path.of(required("app.path")).toAbsolutePath();
         Assumptions.assumeTrue(Files.exists(appPath), "Set app.path to an existing APK before running this test.");
-        serverUrl = URI.create(required("appium.server.url")).toURL();
+        URL serverUrl = URI.create(required("appium.server.url")).toURL();
+        driverManager = new DriverManager(config, serverUrl, appPath);
 
-        driver = createDriver(UI_AUTOMATOR2, true);
+        driver = driverManager.createUiAutomator2Driver();
     }
 
     @Test
@@ -53,7 +49,7 @@ class SampleTest {
         tapMeButton.click();
 
         driver.quit();
-        driver = createDriverWithRetry(FLUTTER_INTEGRATION, true, 3);
+        driver = driverManager.createFlutterIntegrationDriver();
 
         WebDriverWait integrationWait = new WebDriverWait(driver, Duration.ofSeconds(20));
         By integrationTitleLocator = FlutterBy.text("Integration Test");
@@ -100,53 +96,4 @@ class SampleTest {
         return Objects.equals(trimmed, "") ? null : trimmed;
     }
 
-    private BaseOptions<?> androidOptions(String automationName, boolean includeApp) throws IOException {
-        BaseOptions<?> options = new BaseOptions<>()
-                .setPlatformName("Android")
-                .amend("appium:automationName", automationName)
-                .amend("appium:deviceName", required("android.deviceName"))
-                .amend("appium:noReset", true)
-                .amend("appium:dontStopAppOnReset", true)
-                .amend("appium:shouldTerminateApp", false)
-                .amend("appium:forceAppLaunch", false)
-                .amend("appium:flutterSystemPort", FLUTTER_SYSTEM_PORT)
-                .amend("appium:flutterServerLaunchTimeout", 60000);
-
-        if (includeApp) {
-            options.amend("appium:app", appPath.toString());
-        }
-
-        String platformVersion = trimToNull(config.getProperty("android.platformVersion"));
-        if (platformVersion != null) {
-            options.amend("appium:platformVersion", platformVersion);
-        }
-        return options;
-    }
-
-    private AppiumDriver createDriver(String automationName, boolean includeApp) throws IOException {
-        return new AppiumDriver(serverUrl, androidOptions(automationName, includeApp));
-    }
-
-    private AppiumDriver createDriverWithRetry(String automationName, boolean includeApp, int maxAttempts)
-            throws IOException {
-        RuntimeException lastError = null;
-        for (int attempt = 1; attempt <= maxAttempts; attempt++) {
-            try {
-                return createDriver(automationName, includeApp);
-            } catch (RuntimeException e) {
-                lastError = e;
-                if (attempt == maxAttempts) {
-                    break;
-                }
-                try {
-                    Thread.sleep(1000L * attempt);
-                } catch (InterruptedException interruptedException) {
-                    Thread.currentThread().interrupt();
-                    throw new RuntimeException("Interrupted while retrying FlutterIntegration session startup.",
-                            interruptedException);
-                }
-            }
-        }
-        throw lastError == null ? new RuntimeException("Could not create driver session.") : lastError;
-    }
 }
