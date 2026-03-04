@@ -27,7 +27,7 @@ class SampleTest {
     }
 
     @Test
-    void shouldSwitchFromUiAutomatorToFlutterIntegrationDriver() throws IOException {
+    void should_be_able_to_swap_drivers() throws IOException {
         // Keep the app running when switching drivers to assert both native and flutter views in the same test
         driver = driverManager.createUiAutomator2Driver(false);
 
@@ -43,11 +43,15 @@ class SampleTest {
         driver = driverManager.createFlutterIntegrationDriver(true);
 
         WebDriverWait integrationWait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        By integrationTitleLocator = FlutterBy.text("Flutter Test App");
-        WebElement integrationTitle = integrationWait.until(d -> d.findElement(integrationTitleLocator));
+        By appBarLocator = FlutterBy.type("AppBar");
+        WebElement appBar = integrationWait.until(d -> d.findElement(appBarLocator));
+        Assertions.assertTrue(
+                appBar.isDisplayed(),
+                "Expected AppBar to be visible after switching to FlutterIntegration driver.");
+        WebElement integrationTitle = integrationWait.until(d -> appBar.findElement(FlutterBy.text("Flutter Test App")));
         Assertions.assertTrue(
                 integrationTitle.isDisplayed(),
-                "Expected 'Integration Test' title to be visible after switching to FlutterIntegration driver.");
+                "Expected AppBar to contain title text 'Flutter Test App' after switching to FlutterIntegration driver.");
     }
 
     @AfterEach
