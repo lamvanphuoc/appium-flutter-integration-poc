@@ -18,10 +18,11 @@ appium driver install --source npm appium-flutter-integration-driver
 ## Project Structure
 
 - `build.gradle`: dependencies and JUnit config
-- `src/test/java/com/example/HelloButtonVisibleTest.java`: the smoke test
+- `src/test/java/com/example/SampleTest.java`: the smoke test
 - `src/test/resources/config.properties`: runtime config values
 
 The test starts with native locator checks in `UiAutomator2`, then uses Flutter finder strategy (`FlutterBy.text("Integration Test")`) after switching to `FlutterIntegration`.
+`FlutterBy` is consumed directly from the `flutter-finder` library dependency declared in `build.gradle` (via JitPack), not vendored source.
 
 ## Configure Runtime Values
 

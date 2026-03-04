@@ -11,6 +11,7 @@ dependencies {
     testImplementation 'io.appium:java-client:9.5.0'
     testImplementation 'org.seleniumhq.selenium:selenium-java:4.34.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testImplementation 'com.github.saikrishna321:flutter:1.0'
     testRuntimeOnly 'org.slf4j:slf4j-simple:2.0.13'
 }
 
