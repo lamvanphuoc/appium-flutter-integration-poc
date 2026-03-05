@@ -1,6 +1,6 @@
 # Appium Flutter Integration (Java + Gradle)
 
-This project is a minimal Android smoke test that verifies Flutter UI elements are visible using Appium Flutter Integration Driver.
+This project is a smoke test that verifies Flutter UI elements are visible using Appium Flutter Integration Driver on Android or iOS.
 https://github.com/AppiumTestDistribution/appium-flutter-integration-driver
 Locator helper: https://github.com/AppiumTestDistribution/flutter-finder 
 
@@ -8,8 +8,8 @@ Locator helper: https://github.com/AppiumTestDistribution/flutter-finder
 
 - Java 17+
 - Appium 2.x installed and running
-- Android emulator or device available
-- Flutter app built with `appium_flutter_server` integration and APK ready
+- Android emulator/device or iOS simulator available
+- Flutter app built with `appium_flutter_server` integration and app artifacts ready
 
 Install the driver:
 
@@ -33,7 +33,7 @@ Use these versions so setup matches the CartonCloud project
 - `src/test/java/com/example/SampleTest.java`: the smoke test
 - `src/test/resources/config.properties`: runtime config values
 
-The test starts with native locator checks in `UiAutomator2`, then uses Flutter finder strategy (`FlutterBy.text("Integration Test")`) after switching to `FlutterIntegration`.
+The test starts with native locator checks in `UiAutomator2` (Android) or `XCUITest` (iOS), then uses Flutter finder strategy after switching to `FlutterIntegration`.
 `FlutterBy` is consumed directly from the `flutter-finder` library dependency declared in `build.gradle` (via JitPack), not vendored source.
 
 ## Configure Runtime Values
@@ -41,9 +41,13 @@ The test starts with native locator checks in `UiAutomator2`, then uses Flutter 
 Edit `src/test/resources/config.properties`:
 
 - `appium.server.url`: Appium server endpoint (default `http://127.0.0.1:4723`)
+- `platform.android`: set `true` for Android (`UiAutomator2`) or `false` for iOS (`XCUITest`)
 - `android.deviceName`: emulator/device name
 - `android.platformVersion`: optional Android version
-- `app.path`: path to your Flutter APK or iOS `.app` bundle
+- `ios.deviceName`: iOS simulator name
+- `ios.platformVersion`: optional iOS version
+- `app.android.path`: path to your Flutter APK
+- `app.ios.path`: path to your iOS `.app` bundle
 
 ## Generate App Build Artifacts
 
@@ -83,5 +87,5 @@ xcodebuild -workspace ios-test-app.xcworkspace \
 
 ## Troubleshooting
 
-- If `app.path` still points to the placeholder value, the test is skipped by design. Set it to a real APK path.
+- If `app.android.path` or `app.ios.path` points to a placeholder/nonexistent file, the test is skipped by design. Set both to real artifacts.
 - If `"Integration Test"` is not found in the Flutter session, verify your app title and Flutter integration setup, then adjust the Flutter finder text in `SampleTest`.

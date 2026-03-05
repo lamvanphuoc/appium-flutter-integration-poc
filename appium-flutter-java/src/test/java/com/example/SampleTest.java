@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.devicefarm.FlutterBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -24,19 +23,22 @@ import java.util.List;
 class SampleTest {
     private AppiumDriver driver;
     private DriverManager driverManager;
+    private boolean platformAndroid;
 
     @BeforeEach
     void setUp() throws IOException {
         TestConfig config = TestConfig.load();
-        Path appPath = config.appPath();
+        platformAndroid = config.platformAndroid();
+        Path androidAppPath = config.androidAppPath();
+        Path iosAppPath = config.iosAppPath();
         URL serverUrl = config.serverUrl();
-        driverManager = new DriverManager(config.properties(), serverUrl, appPath);
+        driverManager = new DriverManager(config.properties(), serverUrl, androidAppPath, iosAppPath);
     }
 
     @Test
     void should_be_able_to_swap_drivers() throws IOException {
         // Keep the app running when switching drivers to assert both native and flutter views in the same test
-        driver = driverManager.createUiAutomator2Driver(false);
+        driver = createNativeDriver(false);
 
         // Assert native views are visible in UiAutomator2 session
         WebDriverWait nativeWait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -47,7 +49,7 @@ class SampleTest {
 
         // Swap to Flutter Driver to assert flutter views
         driver.quit();
-        driver = driverManager.createFlutterIntegrationDriver(true);
+        driver = driverManager.createFlutterIntegrationDriver(true, platformAndroid);
 
         WebDriverWait integrationWait = new WebDriverWait(driver, Duration.ofSeconds(20));
         By appBarLocator = FlutterBy.type("AppBar");
@@ -64,7 +66,7 @@ class SampleTest {
     @Test
     void various_assertions_on_flutter_views() throws IOException {
         // Arrange
-        driver = driverManager.createUiAutomator2Driver(false);
+        driver = createNativeDriver(false);
         WebDriverWait nativeWait = new WebDriverWait(driver, Duration.ofSeconds(20));
         By nativeButton = XPathLocators.byAnyText("Open Flutter app");
         try {
@@ -76,7 +78,7 @@ class SampleTest {
         }
 
         driver.quit();
-        driver = driverManager.createFlutterIntegrationDriver(true);
+        driver = driverManager.createFlutterIntegrationDriver(true, platformAndroid);
 
         // Act and Assert
         WebDriverWait integrationWait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -122,6 +124,13 @@ class SampleTest {
         swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
         driver.perform(List.of(swipe));
+    }
+
+    private AppiumDriver createNativeDriver(boolean closeAppWhenDone) throws IOException {
+        if (platformAndroid) {
+            return driverManager.createUiAutomator2Driver(closeAppWhenDone);
+        }
+        return driverManager.createXCUITestDriver(closeAppWhenDone);
     }
 
     @AfterEach

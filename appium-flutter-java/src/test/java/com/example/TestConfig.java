@@ -36,14 +36,33 @@ class TestConfig {
         return properties;
     }
 
-    Path appPath() throws IOException {
-        Path appPath = Path.of(required("app.path")).toAbsolutePath();
-        Assumptions.assumeTrue(Files.exists(appPath), "Set app.path to an existing APK before running this test.");
-        return appPath;
+    boolean platformAndroid() throws IOException {
+        String value = required("platform.android").toLowerCase();
+        if (Objects.equals(value, "true")) {
+            return true;
+        }
+        if (Objects.equals(value, "false")) {
+            return false;
+        }
+        throw new IOException("Invalid boolean value for platform.android: " + value);
+    }
+
+    Path androidAppPath() throws IOException {
+        return requiredAppPath("app.android.path", "Set app.android.path to an existing APK before running this test.");
+    }
+
+    Path iosAppPath() throws IOException {
+        return requiredAppPath("app.ios.path", "Set app.ios.path to an existing iOS .app bundle before running this test.");
     }
 
     URL serverUrl() throws IOException {
         return URI.create(required("appium.server.url")).toURL();
+    }
+
+    private Path requiredAppPath(String key, String missingPathMessage) throws IOException {
+        Path appPath = Path.of(required(key)).toAbsolutePath();
+        Assumptions.assumeTrue(Files.exists(appPath), missingPathMessage);
+        return appPath;
     }
 
     private String required(String key) throws IOException {
