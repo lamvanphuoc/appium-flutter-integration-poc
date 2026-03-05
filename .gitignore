@@ -18,6 +18,7 @@
 /appium-flutter-java/local.properties
 /appium-flutter-java/**/build/
 /appium-flutter-java/bin/
+/appium-flutter-java/src/test/resources/ipa/
 
 # flutter-test-app Flutter/Dart artifacts
 /flutter-test-app/.dart_tool/
