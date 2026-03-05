@@ -6,7 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		62BFCD716D129D78EF7EE039 /* Pods_ios_test_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD424052F430CEA61E72CB6 /* Pods_ios_test_app.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		1319587F64E58B16F36C8F2C /* Pods-ios-test-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-test-app.release.xcconfig"; path = "Target Support Files/Pods-ios-test-app/Pods-ios-test-app.release.xcconfig"; sourceTree = "<group>"; };
+		2CD424052F430CEA61E72CB6 /* Pods_ios_test_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_test_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F85288AD4C17B056B7F56C9 /* Pods-ios-test-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-test-app.debug.xcconfig"; path = "Target Support Files/Pods-ios-test-app/Pods-ios-test-app.debug.xcconfig"; sourceTree = "<group>"; };
 		ABA9B9032F59164900C9E468 /* ios-test-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-test-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -23,17 +30,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62BFCD716D129D78EF7EE039 /* Pods_ios_test_app.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A09BD21CCFD152F6EE8EE17 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2F85288AD4C17B056B7F56C9 /* Pods-ios-test-app.debug.xcconfig */,
+				1319587F64E58B16F36C8F2C /* Pods-ios-test-app.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8035F3D65B54CA762A01DD2D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2CD424052F430CEA61E72CB6 /* Pods_ios_test_app.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		ABA9B8FA2F59164900C9E468 = {
 			isa = PBXGroup;
 			children = (
 				ABA9B9052F59164900C9E468 /* ios-test-app */,
 				ABA9B9042F59164900C9E468 /* Products */,
+				6A09BD21CCFD152F6EE8EE17 /* Pods */,
+				8035F3D65B54CA762A01DD2D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,9 +79,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ABA9B90F2F59164A00C9E468 /* Build configuration list for PBXNativeTarget "ios-test-app" */;
 			buildPhases = (
+				FAA13019C43AD37D2098CA11 /* [CP] Check Pods Manifest.lock */,
+				A5ED1094639482E258D6C109 /* [CP-User] Run Flutter Build integration_test_sample Script */,
 				ABA9B8FF2F59164900C9E468 /* Sources */,
 				ABA9B9002F59164900C9E468 /* Frameworks */,
 				ABA9B9012F59164900C9E468 /* Resources */,
+				1385524A585706B9FA158966 /* [CP] Embed Pods Frameworks */,
+				3089BCA16199AC15272485EB /* [CP] Copy Pods Resources */,
+				2D5F9D21E8B925E8C371748A /* [CP-User] Embed Flutter Build integration_test_sample Script */,
 			);
 			buildRules = (
 			);
@@ -64,8 +96,6 @@
 				ABA9B9052F59164900C9E468 /* ios-test-app */,
 			);
 			name = "ios-test-app";
-			packageProductDependencies = (
-			);
 			productName = "ios-test-app";
 			productReference = ABA9B9032F59164900C9E468 /* ios-test-app.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +143,101 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1385524A585706B9FA158966 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-test-app/Pods-ios-test-app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-test-app/Pods-ios-test-app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-test-app/Pods-ios-test-app-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2D5F9D21E8B925E8C371748A /* [CP-User] Embed Flutter Build integration_test_sample Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP-User] Embed Flutter Build integration_test_sample Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset -u\nsource \"${SRCROOT}/../flutter-test-app/.ios/Flutter/flutter_export_environment.sh\"\nexport VERBOSE_SCRIPT_LOGGING=1 && \"$FLUTTER_ROOT\"/packages/flutter_tools/bin/xcode_backend.sh embed_and_thin";
+		};
+		3089BCA16199AC15272485EB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-test-app/Pods-ios-test-app-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-test-app/Pods-ios-test-app-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-test-app/Pods-ios-test-app-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5ED1094639482E258D6C109 /* [CP-User] Run Flutter Build integration_test_sample Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP-User] Run Flutter Build integration_test_sample Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset -u\nsource \"${SRCROOT}/../flutter-test-app/.ios/Flutter/flutter_export_environment.sh\"\nexport VERBOSE_SCRIPT_LOGGING=1 && \"$FLUTTER_ROOT\"/packages/flutter_tools/bin/xcode_backend.sh build";
+		};
+		FAA13019C43AD37D2098CA11 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ios-test-app-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		ABA9B8FF2F59164900C9E468 /* Sources */ = {
@@ -243,6 +368,7 @@
 		};
 		ABA9B9102F59164A00C9E468 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F85288AD4C17B056B7F56C9 /* Pods-ios-test-app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -252,6 +378,7 @@
 				DEVELOPMENT_TEAM = CJBBPDZTJ5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -263,7 +390,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.5;
@@ -282,6 +409,7 @@
 		};
 		ABA9B9112F59164A00C9E468 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1319587F64E58B16F36C8F2C /* Pods-ios-test-app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -291,6 +419,7 @@
 				DEVELOPMENT_TEAM = CJBBPDZTJ5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -302,7 +431,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.5;

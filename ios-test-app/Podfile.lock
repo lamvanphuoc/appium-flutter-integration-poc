@@ -1,0 +1,72 @@
+PODS:
+  - a_bridge (0.0.1):
+    - Flutter
+  - device_info_plus (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - FlutterPluginRegistrant (0.0.1):
+    - a_bridge
+    - device_info_plus
+    - Flutter
+    - image_picker_ios
+    - integration_test
+    - package_info_plus
+    - path_provider_foundation
+    - permission_handler_apple
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - integration_test (0.0.1):
+    - Flutter
+  - package_info_plus (0.4.5):
+    - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - permission_handler_apple (9.3.0):
+    - Flutter
+
+DEPENDENCIES:
+  - a_bridge (from `../flutter-test-app/.ios/.symlinks/plugins/a_bridge/ios`)
+  - device_info_plus (from `../flutter-test-app/.ios/.symlinks/plugins/device_info_plus/ios`)
+  - Flutter (from `../flutter-test-app/.ios/Flutter`)
+  - FlutterPluginRegistrant (from `../flutter-test-app/.ios/Flutter/FlutterPluginRegistrant`)
+  - image_picker_ios (from `../flutter-test-app/.ios/.symlinks/plugins/image_picker_ios/ios`)
+  - integration_test (from `../flutter-test-app/.ios/.symlinks/plugins/integration_test/ios`)
+  - package_info_plus (from `../flutter-test-app/.ios/.symlinks/plugins/package_info_plus/ios`)
+  - path_provider_foundation (from `../flutter-test-app/.ios/.symlinks/plugins/path_provider_foundation/darwin`)
+  - permission_handler_apple (from `../flutter-test-app/.ios/.symlinks/plugins/permission_handler_apple/ios`)
+
+EXTERNAL SOURCES:
+  a_bridge:
+    :path: "../flutter-test-app/.ios/.symlinks/plugins/a_bridge/ios"
+  device_info_plus:
+    :path: "../flutter-test-app/.ios/.symlinks/plugins/device_info_plus/ios"
+  Flutter:
+    :path: "../flutter-test-app/.ios/Flutter"
+  FlutterPluginRegistrant:
+    :path: "../flutter-test-app/.ios/Flutter/FlutterPluginRegistrant"
+  image_picker_ios:
+    :path: "../flutter-test-app/.ios/.symlinks/plugins/image_picker_ios/ios"
+  integration_test:
+    :path: "../flutter-test-app/.ios/.symlinks/plugins/integration_test/ios"
+  package_info_plus:
+    :path: "../flutter-test-app/.ios/.symlinks/plugins/package_info_plus/ios"
+  path_provider_foundation:
+    :path: "../flutter-test-app/.ios/.symlinks/plugins/path_provider_foundation/darwin"
+  permission_handler_apple:
+    :path: "../flutter-test-app/.ios/.symlinks/plugins/permission_handler_apple/ios"
+
+SPEC CHECKSUMS:
+  a_bridge: 79432387ca0e24a1a53dd9244d34183722c37355
+  device_info_plus: bf2e3232933866d73fe290f2942f2156cdd10342
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  FlutterPluginRegistrant: 9b2670d2b39795c48f0fc659eaff5e9b5bff15ef
+  image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
+  integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
+  package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
+  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
+
+PODFILE CHECKSUM: 2a20d49c715833fc222ebfe102f8016473587230
+
+COCOAPODS: 1.16.2
