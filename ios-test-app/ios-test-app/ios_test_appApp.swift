@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct ios_test_appApp: App {
+    @StateObject private var flutterDependencies = FlutterDependencies()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(flutterDependencies: flutterDependencies)
         }
     }
 }
