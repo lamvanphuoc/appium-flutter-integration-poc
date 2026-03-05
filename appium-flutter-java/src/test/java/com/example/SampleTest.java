@@ -53,6 +53,8 @@ class SampleTest {
 
         WebDriverWait integrationWait = new WebDriverWait(driver, Duration.ofSeconds(20));
         By appBarLocator = FlutterBy.type("AppBar");
+        // on iOS the AppBar is undetectable by type, but title text is still detectable
+//        By appBarLocator = FlutterBy.text("Flutter Test App");
         WebElement appBar = integrationWait.until(d -> d.findElement(appBarLocator));
         Assertions.assertTrue(
                 appBar.isDisplayed(),
