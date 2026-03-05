@@ -44,7 +44,7 @@ class SampleTest {
         WebDriverWait nativeWait = new WebDriverWait(driver, Duration.ofSeconds(20));
         By nativeButton = XPathLocators.byAnyText("Open Flutter app");
         WebElement tapMeButton = nativeWait.until(d -> d.findElement(nativeButton));
-        Assertions.assertTrue(tapMeButton.isDisplayed(), "'Open Flutter app' button should be visible in UiAutomator2 session.");
+        Assertions.assertTrue(tapMeButton.isDisplayed(), "'Open Flutter app' button should be visible in session.");
         tapMeButton.click();
 
         // Swap to Flutter Driver to assert flutter views
@@ -71,7 +71,7 @@ class SampleTest {
         By nativeButton = XPathLocators.byAnyText("Open Flutter app");
         try {
             WebElement tapMeButton = nativeWait.until(d -> d.findElement(nativeButton));
-            Assertions.assertTrue(tapMeButton.isDisplayed(), "'Open Flutter app' button should be visible in UiAutomator2 session.");
+            Assertions.assertTrue(tapMeButton.isDisplayed(), "'Open Flutter app' button should be visible in session.");
             tapMeButton.click();
         } catch (TimeoutException ignored) {
             // noReset may keep app on Flutter screen from previous runs; continue with Flutter driver assertions.
