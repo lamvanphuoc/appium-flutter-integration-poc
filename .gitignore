@@ -29,3 +29,6 @@
 /flutter-test-app/build/
 /flutter-test-app/**/build/
 /flutter-test-app/**/ios/Flutter/.last_build_id
+
+# ios-test-app generated artifacts
+/ios-test-app/build/

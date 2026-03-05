@@ -43,15 +43,36 @@ Edit `src/test/resources/config.properties`:
 - `appium.server.url`: Appium server endpoint (default `http://127.0.0.1:4723`)
 - `android.deviceName`: emulator/device name
 - `android.platformVersion`: optional Android version
-- `app.path`: path to your Flutter APK
+- `app.path`: path to your Flutter APK or iOS `.app` bundle
 
-## Generate Flutter APK
+## Generate App Build Artifacts
+
+### Android APK
 
 Run the APK build command:
 
 ```bash
-cd android-test-app 
+cd android-test-app
 ./gradlew :app:assembleDebug -Ptarget=/Users/lamvan/Projects/mobile-cartoncloud/appium-flutter-integration-poc/flutter-test-app/integration_test/app_test.dart
+```
+
+### iOS Simulator app bundle (`ios-test-app.app`)
+
+Run the iOS simulator build command from `ios-test-app`:
+
+```bash
+# 1. Update the Flutter build configuration for the specific test target
+cd flutter-test-app
+flutter build ios --config-only integration_test/app_test.dart
+
+# 2. Build the app using xcodebuild with the target variable
+cd ios-test-app
+xcodebuild -workspace ios-test-app.xcworkspace \
+           -scheme ios-test-app \
+           -configuration Debug \
+           -sdk iphonesimulator \
+           -derivedDataPath build \
+           FLUTTER_TARGET=/Users/lamvan/Projects/mobile-cartoncloud/appium-flutter-integration-poc/flutter-test-app/integration_test/app_test.dart
 ```
 
 ## Run the Test
